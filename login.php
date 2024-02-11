@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,17 +73,26 @@
     <div id="particle-canvas" style="opacity: 0.7;"></div>
 
     <div class="login-container" style="z-index: 100;">
+        <!-- peringatan -->
+        <?php
+        if (isset($_SESSION['login_error'])) {
+            echo '<div class="alert alert-danger" style="font-weight:bold;">' . $_SESSION['login_error'] . '</div>';
+            unset($_SESSION['login_error']);
+        }
+        ?>
         <h2 class="mt-4 mb-5" style="font-weight: 800;">PUSAT DATA PROFIL <br> KELURAHAN PESANTREN</h2>
-        <form>
+
+        <form method="POST" action="proses/proses-login.php">
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Username" required>
+                <input type="text" class="form-control" placeholder="Username" name="username" required>
             </div>
             <div class="mb-3">
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
             </div>
 
-            <button type="submit" class="btn btn-primary d-grid gap-2 col-6 mx-auto mb-5 shadow-lg mt-3">
-                <a href="index.html" style="color: white; text-decoration: none; font-weight: 800;">LOGIN</a>
+            <button type="submit" name="submit-login" class="btn btn-primary d-grid gap-2 col-6 mx-auto mb-5 shadow-lg mt-3">
+                <!-- <a href="dashboard.php" style="color: white; text-decoration: none; font-weight: 800;">LOGIN</a> -->
+                LOGIN
             </button>
         </form>
     </div>
